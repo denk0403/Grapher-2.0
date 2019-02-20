@@ -10,7 +10,7 @@ public class Vector {
 	private Point2D.Double initial = new Point2D.Double(0, 0);
 	private Point2D.Double terminal;
 	private double direction; // angle of vector in radians with respect to positive x-axis
-	private Color color;
+	Color color;
 	
 	// -- Needs Improvement --
 	private int arrowSize = 1;
@@ -27,8 +27,13 @@ public class Vector {
 		this.initial = initial;
 		this.terminal = terminal;
 		this.direction = Math.atan2(terminal.y - initial.y, terminal.x - initial.x);
-		this.color = new Color((int) (201 * Math.random()) + 50, (int) (201 * Math.random()) + 50,
-				(int) (201 * Math.random()) + 50);
+		this.color = new Color((int) (190 * Math.random()) + 45, (int) (190 * Math.random()) + 45,
+				(int) (190 * Math.random()) + 45);
+	}
+	
+	Vector(double x, double y, Color color) {
+		this(x, y);
+		this.color = color;
 	}
 
 	public void paint(Graphics2D g, Scale scale) {
@@ -69,6 +74,30 @@ public class Vector {
 		this.terminal = new Point2D.Double(this.terminal.x - this.initial.x, this.terminal.y - this.initial.y);
 		this.initial = new Point2D.Double(0, 0);
 		return this;
+	}
+	
+	public Point2D.Double getInitialPoint() {
+		return this.initial;
+	}
+	
+	public Point2D.Double getTerminalPoint() {
+		return this.terminal;
+	}
+	
+	public Color getColor() {
+		return this.color;
+	}
+	
+	public double getXComponent() {
+		return this.terminal.x - this.initial.x;
+	}
+	
+	public double getYComponent() {
+		return this.terminal.y - this.initial.y;
+	}
+	
+	public Double getLength() {
+		return Math.hypot(this.getXComponent(), this.getYComponent());
 	}
 
 }
